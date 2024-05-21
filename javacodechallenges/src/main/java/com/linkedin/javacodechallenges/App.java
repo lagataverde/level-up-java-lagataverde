@@ -1,10 +1,13 @@
 package com.linkedin.javacodechallenges;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class App {
     public static double calculateAverageChangeInvested(List<Double> purchases) {
-        return 0;
+        List<Double> investments = purchases.stream().map(purchase -> (Math.ceil(purchase) - purchase))
+                .collect(Collectors.toList());
+        return investments.stream().mapToDouble(Double::doubleValue).average().orElse(0);
     }
 
     public static void main(String[] args) {
