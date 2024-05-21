@@ -2,6 +2,7 @@ package com.linkedin.javacodechallenges;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class App {
     public static final Map<Character, Integer> letterPoints = Map.ofEntries(Map.entry('A', 1),
@@ -14,7 +15,28 @@ public class App {
             Map.entry('Z', 10));
 
     public static int wordScoreCalculator(String word) {
-        return 0;
+        String normalized = word.toUpperCase();
+        AtomicInteger score = new AtomicInteger();
+
+        normalized.chars()
+        .filter(Character::isAlphabetic)
+        .mapToObj(number -> (char) number)
+        .forEachOrdered(character -> {
+                if (letterPoints.containsKey(character)) {
+                        score.getAndAdd(letterPoints.get(character));
+                }
+        });
+
+        return score.get();
+        //My implementation
+        // char[] characters = word.toCharArray();
+        // int wordScore = 0;
+        
+        // for (int i = 0 ; i < characters.length ; i++) {
+        //         wordScore += letterPoints.get(Character.valueOf(Character.toUpperCase(characters[i])));
+        // }
+
+        // return wordScore;
     }
 
     public static void main(String[] args) {
