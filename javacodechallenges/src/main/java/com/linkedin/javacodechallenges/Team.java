@@ -21,4 +21,9 @@ public class Team {
     return scores.stream().filter(score -> score > 0)
         .reduce(Integer::sum).orElse(0);
   }
+
+  public void announceScore() {
+    System.out.println("With " + sumTotalScore() + " points, it's team "
+        + player1 + " and " + player2 + "!");
+  }
 }

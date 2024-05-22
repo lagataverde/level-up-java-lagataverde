@@ -18,6 +18,7 @@ public class TeamUtilsTest {
   private static final Team team3 = new Team("Tony", "Shannon");
 
   private final ByteArrayOutputStream printOut = new ByteArrayOutputStream();
+  private static final PrintStream originalStream = System.out;
 
   @Before
   public void setUpEach() {
@@ -26,7 +27,7 @@ public class TeamUtilsTest {
 
   @After
   public void cleanUpEach() {
-    System.setOut(System.out);
+    System.setOut(originalStream);
     team1.getScores().clear();
     team2.getScores().clear();
     team3.getScores().clear();
