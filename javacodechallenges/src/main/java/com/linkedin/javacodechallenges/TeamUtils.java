@@ -22,7 +22,7 @@ public class TeamUtils {
   }
 
   public static void revealResults(List<Team> teams) {
-    if (teams.isEmpty() || teams.get(0).sumTotalScore() == 0) {
+    if (teams.isEmpty() || teams.stream().allMatch(team -> team.getScores().isEmpty())) {
       System.out.println("The game hasn't started yet.");
     } else {
       Map<Integer, List<Team>> scoresToTeams = teams.stream()
