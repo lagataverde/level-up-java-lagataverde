@@ -13,13 +13,18 @@ import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 
 public class App {
-    public static final String REDACTED_FILE = "redactedFile.txt";
+    public static final String REDACTED_FILE = "redacted-sample.txt";
     public static final String REDACTED = "REDACTED";
 
     public static void redactTextFile(String fileName,
             String[] wordsToredactArray) {
         try {
             File file = new File(fileName);
+
+            if (!fileName.contains(".txt")) {
+                System.out.println("This is not a text file.");
+                return;
+            }
 
             if (file.canRead()) {
                 FileReader fileReader = new FileReader(file);
